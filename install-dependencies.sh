@@ -76,6 +76,7 @@ redhat_packages=(
     lksctp-tools-devel
     lz4-devel
     gcc
+    
     make
     python3
     systemtap-sdt-devel
@@ -208,13 +209,16 @@ case "$ID" in
     fedora)
         dnf install -y "${fedora_packages[@]}"
     ;;
-    rhel|centos)
+    rhel|centos|amzn)
         if [ "$VERSION_ID" = "7" ]; then
             yum install -y epel-release centos-release-scl scl-utils
             yum install -y "${centos7_packages[@]}"
         elif [ "${VERSION_ID%%.*}" = "8" ]; then
             dnf install -y epel-release
-            dnf install -y "${centos8_packages[@]}"
+            dnf install -y "${centos8_packages[@]} ${arch_packages[@]}"
+        elif [ "$VERSION_ID" = "2" ]; then
+            yum install -y epel-release centos-release-scl scl-utils
+            yum install -y "${centos8_packages[@]}"
         fi
     ;;
     opensuse-leap)
