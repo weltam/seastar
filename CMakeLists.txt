@@ -353,12 +353,12 @@ set (Seastar_GEN_BINARY_DIR ${Seastar_BINARY_DIR}/gen)
 #
 
 include (SeastarDependencies)
-seastar_find_dependencies ()
+# seastar_find_dependencies ()
 
 # Private build dependencies not visible to consumers
 find_package (ragel 6.10 REQUIRED)
 find_package (Threads REQUIRED)
-find_package (PthreadSetName REQUIRED)
+# find_package (PthreadSetName REQUIRED)
 
 #
 # Code generation helpers.

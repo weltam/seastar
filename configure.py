@@ -225,7 +225,7 @@ def configure_mode(mode):
         # When building without cooked dependencies, we can invoke cmake directly. We can't call
         # cooking.sh, because without any -i parameters, it will try to build
         # everything.
-        ARGS = ['cmake', '-G', 'Ninja', '../..']
+        ARGS = ['cmake', '-G', 'Ninja', '../..', '-DCMAKE_TOOLCHAIN_FILE=/home/ec2-user/seastar/vcpkg/scripts/buildsystems/vcpkg.cmake']
         dir = BUILD_PATH
     ARGS += TRANSLATED_ARGS
     if args.verbose:

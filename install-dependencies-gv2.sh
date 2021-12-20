@@ -45,6 +45,7 @@ debian_packages=(
     python3
     systemtap-sdt-dev
     libtool
+    cmake
     libyaml-cpp-dev
     libc-ares-dev
     stow
@@ -80,7 +81,7 @@ redhat_packages=(
     python3
     systemtap-sdt-devel
     libtool
-    
+    cmake
     yaml-cpp-devel
     c-ares-devel
     stow
@@ -110,7 +111,7 @@ centos7_packages=(
     "${redhat_packages[@]}"
     ninja-build
     ragel
-    3
+    cmake3
     rh-mongodb36-boost-devel
     devtoolset-9-gcc-c++
     devtoolset-9-libubsan
@@ -153,7 +154,7 @@ arch_packages=(
     lz4
     make
     libtool
-    
+    cmake
     yaml-cpp
     stow
     c-ares
@@ -168,7 +169,7 @@ arch_packages=(
 
 opensuse_packages=(
     c-ares-devel
-    
+    cmake
     hwloc-devel
     libboost_filesystem1_66_0
     libboost_filesystem1_66_0-devel
