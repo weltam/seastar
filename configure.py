@@ -205,7 +205,8 @@ def configure_mode(mode):
         tr(args.debug_shared_ptr, 'DEBUG_SHARED_PTR', value_when_none='default'),
     ]
 
-    ingredients_to_cook = set(args.cook)
+    # ingredients_to_cook = set(args.cook)
+    ingredients_to_cook = False
 
     if args.dpdk:
         ingredients_to_cook.add('dpdk')
