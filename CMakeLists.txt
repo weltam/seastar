@@ -3,6 +3,23 @@ cmake_minimum_required(VERSION 3.10)
 # set the project name
 project(seastar)
 
+set(CMAKE_C_COMPILER "gcc10-gcc")
+set(CMAKE_CXX_COMPILER "gcc10-g++")
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+set (Seastar_SCHEDULING_GROUPS_COUNT
+  "16"
+  CACHE
+  STRING
+  "A positive number to set Seastar's reactor number of allowed different scheduling groups.")
+
+# find_package(Boost REQUIRED)
+
+find_package(Boost REQUIRED COMPONENTS thread context filesystem)
+
 # add the executable
 # add_executable(Tutorial tutorial.cxx)
 add_library (seastar STATIC
@@ -271,9 +288,17 @@ add_library (seastar STATIC
   src/websocket/server.cc
 )
 
-# target_link_libraries(seastar test_library)
+target_include_directories (seastar
+  PUBLIC
+    $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${Seastar_GEN_BINARY_DIR}/include>
+  PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${Seastar_GEN_BINARY_DIR}/src
+    ${Boost_INCLUDE_DIRS})
 
-# find_package(Boost REQUIRED [COMPONENTS <libs>...])
-find_package(Boost REQUIRED )
+target_compile_definitions (seastar
+  PUBLIC SEASTAR_SCHEDULING_GROUPS_COUNT=${Seastar_SCHEDULING_GROUPS_COUNT})
 target_link_libraries(seastar PRIVATE ${Boost_LIBRARIES})
-target_include_directories(seastar PRIVATE ${Boost_INCLUDE_DIRS})
+# target_include_directories(seastar PRIVATE ${Boost_INCLUDE_DIRS})
